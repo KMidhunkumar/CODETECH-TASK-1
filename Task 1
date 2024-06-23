@@ -1,0 +1,49 @@
+/*To manage student records including personal details, courses, and grades,
+we will create a relational database with three main tables: Students, Courses, and Enrollments. Here are the steps to design, create, and manage this database.*/
+CREATE DATABASE COLLEGE;
+USE COLLEGE;
+CREATE TABLE Students(
+    StudentID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    DateOfBirth DATE,
+    Email VARCHAR(100)
+);
+CREATE TABLE Courses (
+    CourseID INT PRIMARY KEY,
+    CourseName VARCHAR(100),
+    Credits INT
+);
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY ,
+    StudentID INT,
+    CourseID INT,
+    Grade CHAR(2),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+INSERT INTO Students VALUES ( 01,'Janu', 'D', '2001-02-01', 'janu.d@example.com');
+ INSERT INTO Students VALUES (02,'Jane', 'Smith', '2001-03-02', 'jane.smith@example.com');
+select * from Students;
+
+INSERT INTO Courses  VALUES ( 21,'Mathematics', 3);
+INSERT INTO Courses  VALUES ( 22,'Physics', 4);
+select * from Courses;
+INSERT INTO Enrollments  VALUES (001,1, 21, 'A');
+INSERT INTO Enrollments  VALUES (002,2, 22, 'B');
+select * from Enrollments;
+
+SELECT s.FirstName, s.LastName, c.CourseName, e.Grade
+FROM Enrollments e
+JOIN Students s ON e.StudentID = s.StudentID
+JOIN Courses c ON e.CourseID = c.CourseID;
+
+SELECT c.CourseName, e.Grade
+FROM Enrollments e
+JOIN Courses c ON e.CourseID = c.CourseID
+WHERE e.StudentID = 1;
+
+select * from Enrollments;
+
+UPDATE Students SET Email = 'janu.newemail@example.com' WHERE StudentID = 1;
+UPDATE Enrollments SET Grade = 'A+' WHERE EnrollmentID = 1;
