@@ -1,4 +1,3 @@
-# CODETECH-TASK-1
 Name: Kamma Midhun Kumar
 Company: CODETECH IT SOLUTIONS
 ID: CT6WDS433
